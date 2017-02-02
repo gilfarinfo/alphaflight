@@ -172,9 +172,13 @@ endif
 
 REVISION := $(shell git log -1 --format="%h")
 
-FC_VER_MAJOR := $(shell grep " FC_VERSION_MAJOR" src/main/build/version.h | awk '{print $$3}' )
-FC_VER_MINOR := $(shell grep " FC_VERSION_MINOR" src/main/build/version.h | awk '{print $$3}' )
-FC_VER_PATCH := $(shell grep " FC_VERSION_PATCH" src/main/build/version.h | awk '{print $$3}' )
+#FC_VER_MAJOR := $(shell grep " FC_VERSION_MAJOR" src/main/build/version.h | awk "{print $$3}" )
+#FC_VER_MINOR := $(shell grep " FC_VERSION_MINOR" src/main/build/version.h | awk "{print $$3}" )
+#FC_VER_PATCH := $(shell grep " FC_VERSION_PATCH" src/main/build/version.h | awk "{print $$3}" )
+
+FC_VER_MAJOR := $(shell grep " FC_VERSION_MAJOR" src/main/build/version.h | cut -f 3 -d " " )
+FC_VER_MINOR := $(shell grep " FC_VERSION_MINOR" src/main/build/version.h | cut -f 3 -d " " )
+FC_VER_PATCH := $(shell grep " FC_VERSION_PATCH" src/main/build/version.h | cut -f 3 -d " " )
 
 FC_VER := $(FC_VER_MAJOR).$(FC_VER_MINOR).$(FC_VER_PATCH)
 
@@ -905,7 +909,7 @@ VPATH        := $(VPATH):$(STDPERIPH_DIR)/src
 #
 
 # Find out if ccache is installed on the system
-CCACHE := ccache
+CCACHE := 
 RESULT = $(shell (which $(CCACHE) > /dev/null 2>&1; echo $$?) )
 ifneq ($(RESULT),0)
 CCACHE :=
