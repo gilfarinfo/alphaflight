@@ -83,7 +83,6 @@
  *    additional channels: AUX13 and AUX14 both with resolution of 4 (8-bit channels)
  */
 
-#define RC_CHANNEL_COUNT 16 // standard variant of the protocol has 16 RC channels
 #define RC_CHANNEL_COUNT_MAX MAX_SUPPORTED_RC_CHANNEL_COUNT // up to 18 RC channels are supported
 
 enum {

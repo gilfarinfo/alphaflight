@@ -1149,7 +1149,7 @@ static bool bstSlaveProcessWriteCommand(uint8_t bstWriteCommand)
             batteryConfig()->vbatwarningcellvoltage = bstRead8();  // vbatlevel when buzzer starts to alert
             break;
         case BST_SET_MOTOR:
-            for (i = 0; i < 8; i++) // FIXME should this use MAX_MOTORS or MAX_SUPPORTED_MOTORS instead of 8
+            for (i = 0; i < MAX_SUPPORTED_MOTORS; i++) // FIXME should this use MAX_MOTORS or MAX_SUPPORTED_MOTORS instead of 8
                 motor_disarmed[i] = convertExternalToMotor(bstRead16());
             break;
         case BST_SET_SERVO_CONFIGURATION:

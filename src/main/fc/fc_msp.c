@@ -1434,7 +1434,7 @@ static mspResult_e mspFcProcessInCommand(uint8_t cmdMSP, sbuf_t *src)
         break;
 
     case MSP_SET_MOTOR:
-        for (int i = 0; i < 8; i++) { // FIXME should this use MAX_MOTORS or MAX_SUPPORTED_MOTORS instead of 8
+        for (int i = 0; i < MAX_SUPPORTED_MOTORS; i++) { // FIXME should this use MAX_MOTORS or MAX_SUPPORTED_MOTORS instead of 8
             motor_disarmed[i] = convertExternalToMotor(sbufReadU16(src));
         }
         break;

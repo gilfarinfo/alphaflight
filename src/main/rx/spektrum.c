@@ -47,9 +47,6 @@
 
 // driver for spektrum satellite receiver / sbus
 
-#define SPEKTRUM_MAX_SUPPORTED_CHANNEL_COUNT 12
-#define SPEKTRUM_2048_CHANNEL_COUNT     12
-#define SPEKTRUM_1024_CHANNEL_COUNT     7
 
 #define SPEKTRUM_NEEDED_FRAME_INTERVAL  5000
 

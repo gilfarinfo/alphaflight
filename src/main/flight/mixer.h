@@ -17,8 +17,6 @@
 
 #pragma once
 
-#define MAX_SUPPORTED_MOTORS 12
-
 #define QUAD_MOTOR_COUNT 4
 
 /*

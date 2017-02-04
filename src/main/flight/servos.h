@@ -17,8 +17,6 @@
 
 #pragma once
 
-#define MAX_SUPPORTED_SERVOS 8
-
 // These must be consecutive, see 'reversedSources'
 enum {
     INPUT_STABILIZED_ROLL = 0,
