@@ -295,10 +295,13 @@ void init(void)
     }
 #endif
 
-#if defined(USE_PWM) || defined(USE_PPM)
+#if defined(USE_PPM)
     if (feature(FEATURE_RX_PPM)) {
         ppmRxInit(ppmConfig(), motorConfig()->motorPwmProtocol);
-    } else if (feature(FEATURE_RX_PARALLEL_PWM)) {
+    } 
+#endif
+#if defined(USE_PWM)
+    if (feature(FEATURE_RX_PARALLEL_PWM)) {
         pwmRxInit(pwmConfig());
     }
 #endif

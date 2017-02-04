@@ -30,6 +30,7 @@
 #define I2C1_OVERCLOCK true
 #define I2C2_OVERCLOCK true
 
+//####################################################
 #ifdef STM32F7
 #define STM_FAST_TARGET
 #define I2C3_OVERCLOCK true
@@ -40,6 +41,7 @@
 /****************************
   STM32 F4 specific settings.
 ****************************/
+//####################################################
 #ifdef STM32F4
 #define STM_FAST_TARGET
 #define USE_DSHOT
@@ -47,10 +49,11 @@
 #define TELEMETRY_IBUS
 #endif
 
+//####################################################
 #ifdef STM32F3
 #define USE_DSHOT
 #endif
-
+//####################################################
 #ifdef STM32F1
 // Using RX DMA disables the use of receive callbacks
 #define USE_UART1_RX_DMA
@@ -59,6 +62,8 @@
 #define CLI_MINIMAL_VERBOSITY
 #endif
 
+//####################################################
+#if defined(RMDO)
 #define SERIAL_RX
 #define USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
 #define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
@@ -70,6 +75,116 @@
 #define USE_CLI
 #define USE_PWM
 #define USE_PPM
+//####################################################
+#elif defined(ZCOREF3)
+#define SERIAL_RX
+#define USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
+#define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
+#define USE_SERIALRX_SBUS       // Frsky and Futaba receivers
+#define USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
+#define USE_SERIALRX_SUMD       // Graupner Hott protocol
+#define USE_SERIALRX_SUMH       // Graupner legacy protocol
+#define USE_SERIALRX_XBUS       // JR
+#define USE_CLI
+#define USE_PWM
+#define USE_PPM
+//####################################################
+#elif defined(FLIP32F3OSD)
+#define SERIAL_RX
+#define USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
+#define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
+#define USE_SERIALRX_SBUS       // Frsky and Futaba receivers
+#define USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
+#define USE_SERIALRX_SUMD       // Graupner Hott protocol
+#define USE_SERIALRX_SUMH       // Graupner legacy protocol
+#define USE_SERIALRX_XBUS       // JR
+#define USE_CLI
+#define USE_PWM
+#define USE_PPM
+//####################################################
+#elif defined(SPRACINGF3)
+#define SERIAL_RX
+#define USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
+#define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
+#define USE_SERIALRX_SBUS       // Frsky and Futaba receivers
+#define USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
+#define USE_SERIALRX_SUMD       // Graupner Hott protocol
+#define USE_SERIALRX_SUMH       // Graupner legacy protocol
+#define USE_SERIALRX_XBUS       // JR
+#define USE_CLI
+#define USE_PWM
+#define USE_PPM
+//####################################################
+#elif defined(ADAPTATOR_F3)
+#define SERIAL_RX
+//#define USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
+//#define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
+#define USE_SERIALRX_SBUS       // Frsky and Futaba receivers
+#define USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
+//#define USE_SERIALRX_SUMD       // Graupner Hott protocol
+//#define USE_SERIALRX_SUMH       // Graupner legacy protocol
+//#define USE_SERIALRX_XBUS       // JR
+#define USE_CLI
+//#define USE_PWM
+#define USE_PPM
+//####################################################
+#elif defined(AFROMINI)
+#define SERIAL_RX
+#define USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
+#define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
+#define USE_SERIALRX_SBUS       // Frsky and Futaba receivers
+#define USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
+#define USE_SERIALRX_SUMD       // Graupner Hott protocol
+#define USE_SERIALRX_SUMH       // Graupner legacy protocol
+#define USE_SERIALRX_XBUS       // JR
+#define USE_CLI
+#define USE_PWM
+#define USE_PPM
+//####################################################
+#elif defined(BEEBRAIN)
+#define SERIAL_RX
+#define USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
+#define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
+#define USE_SERIALRX_SBUS       // Frsky and Futaba receivers
+#define USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
+#define USE_SERIALRX_SUMD       // Graupner Hott protocol
+#define USE_SERIALRX_SUMH       // Graupner legacy protocol
+#define USE_SERIALRX_XBUS       // JR
+#define USE_CLI
+#define USE_PWM
+#define USE_PPM
+//####################################################
+#elif defined(ADAPTATOR_F1) 
+#define SERIAL_RX
+//#define USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
+//#define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
+#define USE_SERIALRX_SBUS       // Frsky and Futaba receivers
+#define USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
+//#define USE_SERIALRX_SUMD       // Graupner Hott protocol
+//#define USE_SERIALRX_SUMH       // Graupner legacy protocol
+//#define USE_SERIALRX_XBUS       // JR
+#define USE_CLI
+//#define USE_PWM
+#define USE_PPM
+//####################################################
+#elif  defined(NAZE)
+#define SERIAL_RX
+#define USE_SERIALRX_CRSF       // Team Black Sheep Crossfire protocol
+#define USE_SERIALRX_SPEKTRUM   // SRXL, DSM2 and DSMX protocol
+#define USE_SERIALRX_SBUS       // Frsky and Futaba receivers
+#define USE_SERIALRX_IBUS       // FlySky and Turnigy receivers
+#define USE_SERIALRX_SUMD       // Graupner Hott protocol
+#define USE_SERIALRX_SUMH       // Graupner legacy protocol
+#define USE_SERIALRX_XBUS       // JR
+#define USE_CLI
+#define USE_PWM
+#define USE_PPM
+//####################################################
+#else
+#error "Board not defined"
+#endif
+
+
 
 #if defined(STM_FAST_TARGET)
 #define MAX_AUX_CHANNELS                99

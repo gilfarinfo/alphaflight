@@ -3456,8 +3456,10 @@ const cliResourceValue_t resourceTable[] = {
 #ifdef USE_SERVOS
     { OWNER_SERVO,         &servoConfig()->ioTags[0], MAX_SUPPORTED_SERVOS },
 #endif
-#if defined(USE_PWM) || defined(USE_PPM)
+#if defined(USE_PPM)
     { OWNER_PPMINPUT,      &ppmConfig()->ioTag, 0 },
+#endif
+#if defined(USE_PWM)
     { OWNER_PWMINPUT,      &pwmConfig()->ioTags[0], PWM_INPUT_PORT_COUNT },
 #endif
 #ifdef SONAR

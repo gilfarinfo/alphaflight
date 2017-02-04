@@ -663,8 +663,10 @@ void createDefaultConfig(master_t *config)
 
     resetBatteryConfig(&config->batteryConfig);
 
-#if defined(USE_PWM) || defined(USE_PPM)
+#if defined(USE_PPM)
     resetPpmConfig(&config->ppmConfig);
+#endif
+#if defined(USE_PWM)
     resetPwmConfig(&config->pwmConfig);
 #endif
 
