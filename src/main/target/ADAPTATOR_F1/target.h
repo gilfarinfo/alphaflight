@@ -57,7 +57,7 @@
 #define LED0                    PB3
 #endif
 
-#ifdef ADPOATATOR_F1
+#ifdef ADAPTATOR_F1
 #define LED1                    PB4
 #elif ADAPTATOR_F3
 #else
