@@ -16,6 +16,8 @@
  */
 
 #pragma once
+//Ordinary not used. But which use it ?
+//#define USE_HAL_DRIVER
 
 // type conversion warnings.
 // -Wconversion can be turned on to enable the process of eliminating these warnings
@@ -616,6 +618,36 @@
 #endif
 
 
+/*
+  C:\STM32Toolchain\quadri\quadri_dev\alphaflight\src\main\target\ALIENFLIGHTF1\target.h (1 hit)
+	Line 23: #define BRUSHED_ESC_AUTODETECT
+	#define TARGET_BOARD_IDENTIFIER "AFF1" 
+	#define BRUSHED_ESC_AUTODETECT
+  C:\STM32Toolchain\quadri\quadri_dev\alphaflight\src\main\target\ALIENFLIGHTF3\target.h (1 hit)
+	Line 29: #define BRUSHED_ESC_AUTODETECT
+	#define TARGET_BOARD_IDENTIFIER "AFF3"
+	#define BRUSHED_ESC_AUTODETECT
+  C:\STM32Toolchain\quadri\quadri_dev\alphaflight\src\main\target\ALIENFLIGHTF4\target.h (1 hit)
+	Line 24: #define BRUSHED_ESC_AUTODETECT
+	#define TARGET_BOARD_IDENTIFIER "AFF4"
+	#define BRUSHED_ESC_AUTODETECT
+  C:\STM32Toolchain\quadri\quadri_dev\alphaflight\src\main\target\SPRACINGF3EVO\target.h (1 hit)
+	Line 28: #define BRUSHED_ESC_AUTODETECT
+	#ifdef AIORACERF3
+#define TARGET_BOARD_IDENTIFIER "ARF3"
+#else
+#define TARGET_BOARD_IDENTIFIER "SPEV"
+#endif
+	#define BRUSHED_ESC_AUTODETECT
+  C:\STM32Toolchain\quadri\quadri_dev\alphaflight\src\main\target\SPRACINGF3MINI\target.h (1 hit)
+	Line 176: #define BRUSHED_ESC_AUTODETECT
+	TINYBEEF3 -> #define TARGET_BOARD_IDENTIFIER "TBF3"
+	#ifdef TINYBEEF3
+#define BRUSHED_ESC_AUTODETECT
+#else
+	#define TARGET_BOARD_IDENTIFIER "SRFM"
+
+*/
 //####################################################
 #if defined(RMDO)
 

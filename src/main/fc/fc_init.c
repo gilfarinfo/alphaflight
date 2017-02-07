@@ -155,7 +155,133 @@ void processLoopback(void)
     }
 #endif
 }
+uint8_t GoStateConfigLoaded(void* a){
+	UNUSED(a);
+    systemState |= SYSTEM_STATE_CONFIG_LOADED;
+	return (1);
+}
+uint8_t DebugLoad(void* a){
+    debugMode = masterConfig.debug_mode;
+	return (1);
+}
+uint8_t InitGoodLed(void* a){
+    ledInit(statusLedConfig());
+    LED2_ON;
 
+	return (1);
+}
+#if defined(BUTTONS)
+
+uint8_t InitButtonA_B(void* a){
+#ifdef BUTTON_A_PIN
+    IO_t buttonAPin = IOGetByTag(IO_TAG(BUTTON_A_PIN));
+    IOInit(buttonAPin, OWNER_SYSTEM, 0);
+    IOConfigGPIO(buttonAPin, IOCFG_IPU);
+#endif
+
+#ifdef BUTTON_B_PIN
+    IO_t buttonBPin = IOGetByTag(IO_TAG(BUTTON_B_PIN));
+    IOInit(buttonBPin, OWNER_SYSTEM, 0);
+    IOConfigGPIO(buttonBPin, IOCFG_IPU);
+#endif
+
+    // Check status of bind plug and exit if not active
+    delayMicroseconds(10);  // allow configuration to settle
+
+    if (!isMPUSoftReset()) {
+#if defined(BUTTON_A_PIN) && defined(BUTTON_B_PIN)
+        // two buttons required
+        uint8_t secondsRemaining = 5;
+        bool bothButtonsHeld;
+        do {
+            bothButtonsHeld = !IORead(buttonAPin) && !IORead(buttonBPin);
+            if (bothButtonsHeld) {
+                if (--secondsRemaining == 0) {
+                    resetEEPROM();
+                    systemReset();
+                }
+                delay(1000);
+                LED0_TOGGLE;
+            }
+        } while (bothButtonsHeld);
+#endif
+    }
+	return (1);
+}
+#endif
+
+#ifdef SPEKTRUM_BIND
+
+uint8_t InitSpektrum(void * a){
+    if (feature(FEATURE_RX_SERIAL)) {
+        switch (rxConfig()->serialrx_provider) {
+            case SERIALRX_SPEKTRUM1024:
+            case SERIALRX_SPEKTRUM2048:
+                // Spektrum satellite binding if enabled on startup.
+                // Must be called before that 100ms sleep so that we don't lose satellite's binding window after startup.
+                // The rest of Spektrum initialization will happen later - via spektrumInit()
+                spektrumBind(rxConfig());
+                break;
+        }
+    }
+	return(1);
+}
+#endif	
+
+uint8_t InitAvoidUart(void* a){
+	UNUSED(a);
+#if defined(AVOID_UART1_FOR_PWM_PPM)
+    serialInit(serialConfig(), feature(FEATURE_SOFTSERIAL),
+            feature(FEATURE_RX_PPM) || feature(FEATURE_RX_PARALLEL_PWM) ? SERIAL_PORT_USART1 : SERIAL_PORT_NONE);
+#elif defined(AVOID_UART2_FOR_PWM_PPM)
+    serialInit(serialConfig(), feature(FEATURE_SOFTSERIAL),
+            feature(FEATURE_RX_PPM) || feature(FEATURE_RX_PARALLEL_PWM) ? SERIAL_PORT_USART2 : SERIAL_PORT_NONE);
+#elif defined(AVOID_UART3_FOR_PWM_PPM)
+    serialInit(serialConfig(), feature(FEATURE_SOFTSERIAL),
+            feature(FEATURE_RX_PPM) || feature(FEATURE_RX_PARALLEL_PWM) ? SERIAL_PORT_USART3 : SERIAL_PORT_NONE);
+#else
+    serialInit(serialConfig(), feature(FEATURE_SOFTSERIAL), SERIAL_PORT_NONE);
+#endif
+    return(1);
+}
+
+InitFunctionElem_t rgFunctionInit[] = {
+#ifdef USE_HAL_DRIVER
+	{HAL_Init, 0},
+#endif
+	{printfSupportInit, 0},
+	{systemInit, 0},
+	{IOInitGlobal, 0},
+#ifdef USE_HARDWARE_REVISION_DETECTION
+	{detectHardwareRevision, 0},
+#endif
+	{initEEPROM, 0},
+	{ensureEEPROMContainsValidData, 0},
+	{readEEPROM, 0},
+	{GoStateConfigLoaded, 0},
+	{DebugLoad, 0},
+	{latchActiveFeatures, 0},
+#ifdef TARGET_PREINIT
+	{targetPreInit, 0},
+#endif
+#ifdef USE_EXTI
+	{EXTIInit, },
+#endif
+#if defined(BUTTONS)
+	{InitButtonA_B, 0},
+#endif
+#ifdef SPEKTRUM_BIND
+	{InitSpektrum, 0},
+#endif
+	{delay, 100},
+	{timerInit, 0},
+	{InitAvoidUart, },
+	{, },
+	{, },
+	{, },
+	
+	
+}
 void init(void)
 {
 #ifdef USE_HAL_DRIVER
@@ -268,7 +394,7 @@ void init(void)
 #else
     serialInit(serialConfig(), feature(FEATURE_SOFTSERIAL), SERIAL_PORT_NONE);
 #endif
-
+//ICI
     mixerInit(mixerConfig()->mixerMode, masterConfig.customMotorMixer);
 #ifdef USE_SERVOS
     servoMixerInit(masterConfig.customServoMixer);

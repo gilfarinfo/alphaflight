@@ -30,3 +30,10 @@ extern uint8_t systemState;
 
 void init(void);
 void processLoopback(void);
+
+typedef uint8_t (*FunctionInit_t)( void * );
+
+typedef struct {
+	FunctionInit_t FunctionInit;
+	uint32_t param;
+} InitFunctionElem_t;
